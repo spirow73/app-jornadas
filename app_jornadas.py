@@ -12,33 +12,35 @@ st.set_page_config(
 )
 
 # --- ESTILOS VISUALES (PREMIUM UI) ---
+# --- ESTILOS VISUALES (CARLS LEAGUE UI) ---
 st.markdown("""
 <style>
     /* Estilo general moderno */
     .stApp {
-        background: linear-gradient(to bottom right, #0F172A, #1E293B);
+        background: linear-gradient(to bottom right, #1a1a1a, #000000);
         color: #E2E8F0;
         font-family: 'Inter', sans-serif;
     }
     
     /* Encabezados */
     h1, h2, h3 {
-        color: #38BDF8 !important;
-        font-weight: 700;
+        color: #FACC15 !important;
+        font-weight: 800;
         letter-spacing: -0.5px;
+        text-transform: uppercase;
     }
     
     h1 {
-        background: -webkit-linear-gradient(45deg, #38BDF8, #818CF8);
+        background: -webkit-linear-gradient(45deg, #FACC15, #EAB308);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
 
     /* Cards para las jornadas */
     .jornada-card {
-        background-color: #1E293B;
-        border: 1px solid #334155;
+        background-color: #171717;
+        border: 1px solid #333;
         border-radius: 12px;
         padding: 16px;
         margin-bottom: 16px;
@@ -46,8 +48,8 @@ st.markdown("""
     }
     .jornada-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        border-color: #38BDF8;
+        box-shadow: 0 10px 15px -3px rgba(250, 204, 21, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border-color: #FACC15;
     }
     
     .match-row {
@@ -56,15 +58,15 @@ st.markdown("""
         gap: 15px;
         align-items: center;
         padding: 10px 0;
-        border-bottom: 1px solid #334155;
+        border-bottom: 1px solid #333;
     }
     .match-row:last-child {
         border-bottom: none;
     }
     
     .team-name {
-        font-weight: 500;
-        color: #F1F5F9;
+        font-weight: 600;
+        color: #F5F5F5;
         font-size: 0.95rem;
     }
 
@@ -77,59 +79,62 @@ st.markdown("""
     }
     
     .vs-badge {
-        color: #94A3B8;
+        color: #FACC15;
         font-size: 0.75em;
-        font-weight: 700;
-        background: #0F172A;
-        padding: 3px 8px;
-        border-radius: 8px;
-        border: 1px solid #334155;
+        font-weight: 800;
+        background: #262626;
+        padding: 4px 10px;
+        border-radius: 99px;
+        border: 1px solid #444;
         letter-spacing: 1px;
     }
 
     /* Botones */
     .stButton>button {
-        background: linear-gradient(90deg, #38BDF8, #818CF8);
-        color: white;
+        background: linear-gradient(90deg, #FACC15, #EAB308);
+        color: black;
         border: none;
         padding: 0.6rem 1.5rem;
         border-radius: 8px;
-        font-weight: 600;
+        font-weight: 700;
+        text-transform: uppercase;
         transition: all 0.3s ease;
         width: 100%;
     }
     .stButton>button:hover {
-        opacity: 0.9;
+        opacity: 0.95;
         transform: scale(1.02);
-        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        box-shadow: 0 4px 20px rgba(250, 204, 21, 0.4);
+        color: black;
     }
 
     /* Sidebar */
     [data-testid="stSidebar"] {
-        background-color: #0F172A;
-        border-right: 1px solid #334155;
+        background-color: #0A0A0A;
+        border-right: 1px solid #333;
     }
     
     /* Inputs */
     .stTextArea textarea {
-        background-color: #1E293B;
+        background-color: #171717;
         color: #F1F5F9;
-        border: 1px solid #475569;
+        border: 1px solid #404040;
         border-radius: 8px;
     }
     .stTextArea textarea:focus {
-        border-color: #38BDF8;
-        box-shadow: 0 0 0 1px #38BDF8;
+        border-color: #FACC15;
+        box-shadow: 0 0 0 1px #FACC15;
     }
 
     .descansa-tag {
         display: inline-block;
-        background-color: #334155;
-        color: #94A3B8;
+        background-color: #262626;
+        color: #FACC15;
         padding: 2px 8px;
         border-radius: 4px;
         font-size: 0.8em;
         margin-left: 10px;
+        border: 1px solid #444;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -276,8 +281,15 @@ def solve_division_schedule(div_name, teams, history_matches):
 
 # --- UI PRINCIPAL ---
 
-st.title("⚽ Generador de Calendario de Ligas")
-st.markdown("Genera automáticamente los emparejamientos para tus divisiones asegurando que todos jueguen contra todos y descansen una vez.")
+col_logo, col_title = st.columns([1, 5])
+with col_logo:
+    try:
+        st.image("logo.png", width=120)
+    except:
+        st.write("⚽")
+with col_title:
+    st.title("CARLS LEAGUE")
+    st.markdown("Generador Oficial de Calendarios")
 
 with st.sidebar:
     st.header("⚙️ Configuración")
